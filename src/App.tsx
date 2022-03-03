@@ -62,7 +62,6 @@ const App = () => {
 
   return (
     <Wrapper>
-      <h1>Some Title</h1>
       <Drawer anchor='left' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
         <Cart 
           cartItems={cartItems}
