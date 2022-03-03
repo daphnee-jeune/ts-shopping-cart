@@ -19,20 +19,20 @@ export type CartItemType = {
   amount: number;
 }
 
-const fetchItems = async (): Promise<CartItemType[]> => {
+const fetchCartItems = async (): Promise<CartItemType[]> => {
   return await (await fetch('https://fakestoreapi.com/products')).json()
 } 
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState([] as CartItemType[])
-  const { data, isLoading, error } = useQuery<CartItemType[]>('products', fetchItems)
+  const { data, isLoading, error } = useQuery<CartItemType[]>('products', fetchCartItems)
   
   const getTotalItems = (items: CartItemType[]) => items.reduce((ack: number, item) => ack + item.amount, 0)
   const handleAddToCart = (clickedItem: CartItemType) => {
     setCartItems(prevItems => {
-      const isItemInCart = prevItems.find(item => item.id === clickedItem.id)
-      if(isItemInCart) {
+      const isItemAddedInCart = prevItems.find(item => item.id === clickedItem.id)
+      if(isItemAddedInCart) {
         return prevItems.map(item => (
           item.id === clickedItem.id ? 
             { ...item, amount: item.amount + 1 } :
@@ -42,7 +42,7 @@ const App = () => {
       return [...prevItems, { ...clickedItem, amount: 1 }]
     })
   }
-  const hanldleRemoveFromCart = (id: number) => {
+  const hanldleDeleteFromCart = (id: number) => {
     setCartItems(prevItems => {
       return prevItems.reduce((ack, item) => {
         if (item.id === id) {
@@ -68,7 +68,7 @@ const App = () => {
         <Cart 
           cartItems={cartItems}
           addToCart={handleAddToCart}
-          removeFromCart={hanldleRemoveFromCart}
+          removeFromCart={hanldleDeleteFromCart}
         />
       </Drawer>
     <StyledButton onClick={() => setIsCartOpen(true)} >
