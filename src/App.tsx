@@ -19,14 +19,14 @@ export type CartItemType = {
   amount: number;
 }
 
-const getProducts = async (): Promise<CartItemType[]> => {
+const fetchItems = async (): Promise<CartItemType[]> => {
   return await (await fetch('https://fakestoreapi.com/products')).json()
 } 
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState([] as CartItemType[])
-  const { data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts)
+  const { data, isLoading, error } = useQuery<CartItemType[]>('products', fetchItems)
   
   const getTotalItems = (items: CartItemType[]) => items.reduce((ack: number, item) => ack + item.amount, 0)
   const handleAddToCart = (clickedItem: CartItemType) => {
