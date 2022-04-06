@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    font-familyL Arial, Helvetic, sans-serif;
+    font-family: Arial, Helvetic, sans-serif;
     border-bottom: 1px solid lightblue;
     padding-bottom: 20px;
 
