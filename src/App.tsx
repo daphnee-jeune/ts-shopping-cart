@@ -58,7 +58,7 @@ const App = () => {
   }
 
   isLoading && <LinearProgress />
-  error && <div>Something went wrong! Please try again.</div>
+  error && <div>Oops,try again.</div>
 
   return (
     <Wrapper>
